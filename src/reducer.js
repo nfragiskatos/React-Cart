@@ -7,20 +7,12 @@ const reducer = (state, action) => {
 	if (action.type === 'REMOVE') {
 		return { ...state, cart: state.cart.filter((item) => item.id !== action.payload) };
 	}
-	if (action.type === 'INCREMENT_COUNT') {
-		let newCart = state.cart.map((item) => {
-			if (item.id === action.payload) {
-				return { ...item, amount: item.amount + 1 };
-			}
-			return item;
-		});
-		return { ...state, cart: newCart };
-	}
-	if (action.type === 'DECREMENT_COUNT') {
+	if (action.type === 'ALTER_AMOUNT') {
+		const { id, isIncreasing } = action.payload;
 		let newCart = state.cart
 			.map((item) => {
-				if (item.id === action.payload) {
-					return { ...item, amount: item.amount - 1 };
+				if (item.id === id) {
+					return { ...item, amount: item.amount + (isIncreasing ? 1 : -1) };
 				}
 				return item;
 			})

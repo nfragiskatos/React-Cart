@@ -24,19 +24,15 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: 'REMOVE', payload: id });
 	};
 
-	const incrementCount = (id) => {
-		dispatch({ type: 'INCREMENT_COUNT', payload: id });
-	};
-
-	const decrementCount = (id) => {
-		dispatch({ type: 'DECREMENT_COUNT', payload: id });
-	};
-
 	const fetchData = async () => {
 		dispatch({ type: 'LOADING' });
 		const response = await fetch(url);
 		const cart = await response.json();
 		dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
+	};
+
+	const alterAmount = (id, isIncreasing) => {
+		dispatch({ type: 'ALTER_AMOUNT', payload: { id, isIncreasing } });
 	};
 
 	useEffect(() => {
@@ -56,8 +52,7 @@ const AppProvider = ({ children }) => {
 				...state,
 				clearCart,
 				remove,
-				incrementCount,
-				decrementCount
+				alterAmount
 			}}
 		>
 			{children}
