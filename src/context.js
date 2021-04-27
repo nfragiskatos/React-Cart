@@ -28,13 +28,18 @@ const AppProvider = ({ children }) => {
 		dispatch({ type: 'INCREMENT_COUNT', payload: id });
 	};
 
+	const decrementCount = (id) => {
+		dispatch({ type: 'DECREMENT_COUNT', payload: id });
+	};
+
 	return (
 		<AppContext.Provider
 			value={{
 				...state,
 				clearCart,
 				remove,
-				incrementCount
+				incrementCount,
+				decrementCount
 			}}
 		>
 			{children}
